@@ -4,8 +4,8 @@ import rsgislib.vectorgeoms
 import tqdm
 
 
-in_vec_dir = "country_units"
-out_vec_dir = "countries_intersections"
+in_vec_dir = "/Users/pfb/Temp/gmw_v4_un_eez_chks/country_units_20250225"
+out_vec_dir = "/Users/pfb/Temp/gmw_v4_un_eez_chks/countries_intersections_20250225"
 
 
 intersect_lut = rsgislib.tools.utils.read_json_to_dict("country_rgn_intersects.json")
@@ -32,6 +32,7 @@ for base_cntry in tqdm.tqdm(intersect_lut, position=0, leave=True):
             out_vec_lyr = f"{base_cntry}_{cmp_cntry}"
             out_vec_file = os.path.join(out_vec_dir, f"{out_vec_lyr}.gpkg")
             if not os.path.exists(out_vec_file):
+                print(f"Create {out_vec_file}")
                 try:
                     rsgislib.vectorgeoms.vec_lyr_intersection_gp(
                         base_vec_file,
@@ -44,5 +45,6 @@ for base_cntry in tqdm.tqdm(intersect_lut, position=0, leave=True):
                         del_exist_vec=False,
                     )
                     intersect_lut_chkd[base_cntry].append(cmp_cntry)
-                except:
+                except Exception as e:
+                    print(e)
                     continue

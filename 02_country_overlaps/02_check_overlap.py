@@ -73,7 +73,7 @@ def vec_intersects_vec(
     return does_intersect
 
 
-cntry_vec_files = glob.glob("country_units/*.gpkg")
+cntry_vec_files = glob.glob("/Users/pfb/Temp/gmw_v4_un_eez_chks/country_units_20250225/*.gpkg")
 
 intersect_lut = dict()
 
